@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RestController
 class ArticleController {
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun helloWorld() = "Hello World"
+    fun helloWorld() = "Hello World!"
 }
