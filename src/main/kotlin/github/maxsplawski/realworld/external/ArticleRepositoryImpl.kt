@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-class ArticleRepositoryImpl : ArticleRepository, MongoRepository<ArticleEntity, Int> {
+abstract class ArticleRepositoryImpl : ArticleRepository, MongoRepository<ArticleEntity, Int> {
 
     override fun findById(id: Int): Article? {
         TODO("Not yet implemented")
