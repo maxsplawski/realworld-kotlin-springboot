@@ -1,8 +1,8 @@
 package github.maxsplawski.realworld.domain
 
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class ArticleFacade(private val articleRepository: ArticleRepository) {
 
     fun getArticle(id: ArticleId): Article? {
