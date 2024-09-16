@@ -1,14 +1,14 @@
 package github.maxsplawski.realworld.external
 
 import github.maxsplawski.realworld.domain.Article
+import github.maxsplawski.realworld.domain.ArticleId
 import github.maxsplawski.realworld.domain.ArticleRepository
-import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.stereotype.Repository
 
 @Repository
-abstract class ArticleRepositoryImpl : ArticleRepository, MongoRepository<ArticleEntity, Int> {
+class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : ArticleRepository {
 
-    override fun findById(id: Int): Article? {
-        TODO("Not yet implemented")
-    }
+    override fun findById(id: ArticleId): Article? =
+        mongoOperations.findById(id, ArticleEntity::class.java)?.toDomain()
 }
