@@ -33,9 +33,9 @@ class ArticleControllerTest {
 
         mockMvc.get("/api/articles/{id}", article.id.value)
             .andExpect { status { isOk() } }
-            .andExpect { jsonPath("$.id") { value(article.id.value) } }
-            .andExpect { jsonPath("$.title") { value(article.title) } }
-            .andExpect { jsonPath("$.body") { value(article.body) } }
-            .andExpect { jsonPath("$.description") { value(article.description) } }
+            .andExpect { jsonPath("$.article.id") { value(article.id.value) } }
+            .andExpect { jsonPath("$.article.title") { value(article.title) } }
+            .andExpect { jsonPath("$.article.body") { value(article.body) } }
+            .andExpect { jsonPath("$.article.description") { value(article.description) } }
     }
 }
