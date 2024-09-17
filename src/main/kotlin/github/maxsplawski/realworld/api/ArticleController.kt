@@ -2,6 +2,7 @@ package github.maxsplawski.realworld.api
 
 import github.maxsplawski.realworld.domain.ArticleFacade
 import github.maxsplawski.realworld.domain.ArticleId
+import github.maxsplawski.realworld.domain.toDto
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,5 +20,5 @@ class ArticleController(private val facade: ArticleFacade) {
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun getArticle(@PathVariable id: ArticleId) =
-        facade.getArticle(id) ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
+        facade.getArticle(id)?.toDto() ?: throw ResponseStatusException(HttpStatus.NOT_FOUND)
 }
