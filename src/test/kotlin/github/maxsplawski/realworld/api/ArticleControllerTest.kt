@@ -1,9 +1,8 @@
 package github.maxsplawski.realworld.api
 
-import github.maxsplawski.realworld.domain.Article
 import github.maxsplawski.realworld.domain.ArticleFacade
-import github.maxsplawski.realworld.domain.ArticleId
 import org.junit.jupiter.api.Test
+import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
@@ -21,19 +20,22 @@ class ArticleControllerTest {
     private lateinit var facade: ArticleFacade
 
     @Test
-    fun `should return hello world`() {
-        val article = Article(
-            id = ArticleId("123"),
+    fun `should return an article`() {
+        // given
+        val article = ArticleDto(
+            id = "123",
             title = "test",
             body = "testBody",
             description = "testDescription",
         )
 
-        `when`(facade.getArticle(ArticleId("123"))).thenReturn(article)
+        // when
+        `when`(facade.getArticle(any())).thenReturn(article)
 
-        mockMvc.get("/api/articles/{id}", article.id.value)
+        // then
+        mockMvc.get("/api/articles/{id}", article.id)
             .andExpect { status { isOk() } }
-            .andExpect { jsonPath("$.article.id") { value(article.id.value) } }
+            .andExpect { jsonPath("$.article.id") { value(article.id) } }
             .andExpect { jsonPath("$.article.title") { value(article.title) } }
             .andExpect { jsonPath("$.article.body") { value(article.body) } }
             .andExpect { jsonPath("$.article.description") { value(article.description) } }
