@@ -10,7 +10,8 @@ class ArticleFacade(private val articleRepository: ArticleRepository) {
         return articleRepository.findById(id)?.toDto()
     }
 
-    fun createArticle(articleDto: ArticleDto): ArticleDto? {
-        TODO()
+    fun createArticle(articleDto: ArticleDto): ArticleDto {
+        val article = Article.from(articleDto)
+        return articleRepository.save(article).toDto()
     }
 }

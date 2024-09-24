@@ -7,7 +7,16 @@ data class Article(
     val title: String,
     val description: String,
     val body: String,
-)
+) {
+    companion object {
+        fun from(dto: ArticleDto) = Article(
+            id = ArticleId(dto.id),
+            title = dto.title,
+            description = dto.description,
+            body = dto.body,
+        )
+    }
+}
 
 @JvmInline
 value class ArticleId(val value: String)
