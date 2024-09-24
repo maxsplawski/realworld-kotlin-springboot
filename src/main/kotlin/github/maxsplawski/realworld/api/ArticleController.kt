@@ -12,6 +12,11 @@ import org.springframework.web.server.ResponseStatusException
 @RequestMapping("/api/articles")
 class ArticleController(private val facade: ArticleFacade) {
 
+    @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getArticles(@ModelAttribute articlesRequest: ArticlesRequest) =
+        facade.getArticles(articlesRequest)
+
+
     @GetMapping(
         value = ["/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE]

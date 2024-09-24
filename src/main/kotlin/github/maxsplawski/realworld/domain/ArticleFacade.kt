@@ -1,10 +1,17 @@
 package github.maxsplawski.realworld.domain
 
 import github.maxsplawski.realworld.api.ArticleDto
+import github.maxsplawski.realworld.api.ArticlesRequest
 import org.springframework.stereotype.Component
 
 @Component
 class ArticleFacade(private val articleRepository: ArticleRepository) {
+
+    fun getArticles(articlesRequest: ArticlesRequest): List<ArticleDto> {
+        return articleRepository
+            .findAll(ArticlesFilter.from(articlesRequest))
+            .map { it.toDto() }
+    }
 
     fun getArticle(id: ArticleId): ArticleDto? {
         return articleRepository.findById(id)?.toDto()
