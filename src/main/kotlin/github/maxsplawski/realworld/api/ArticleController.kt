@@ -4,6 +4,7 @@ import github.maxsplawski.realworld.domain.ArticleFacade
 import github.maxsplawski.realworld.domain.ArticleId
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.server.ResponseStatusException
 
@@ -22,6 +23,10 @@ class ArticleController(private val facade: ArticleFacade) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun createArticle(@RequestBody articleDto: ArticleDto) =
-        facade.createArticle(articleDto) ?: throw ResponseStatusException(HttpStatus.BAD_REQUEST)
+    fun createArticle(@RequestBody articleDto: ArticleDto): ResponseEntity<ArticleDto> {
+        val article = facade.createArticle(articleDto)
+        return ResponseEntity
+            .status(HttpStatus.CREATED)
+            .body(article)
+    }
 }
