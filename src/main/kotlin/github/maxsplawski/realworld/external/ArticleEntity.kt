@@ -14,7 +14,17 @@ data class ArticleEntity(
     val title: String,
     val description: String,
     val body: String,
-)
+) {
+    companion object {
+        fun from(article: Article) =
+            ArticleEntity(
+                ObjectId(article.id.value),
+                article.title,
+                article.description,
+                article.body,
+            )
+    }
+}
 
 fun ArticleEntity.toDomain() =
     Article(

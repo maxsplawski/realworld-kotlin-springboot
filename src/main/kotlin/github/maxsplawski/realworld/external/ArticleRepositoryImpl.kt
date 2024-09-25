@@ -18,5 +18,5 @@ class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : Arti
         mongoOperations.findById(id, ArticleEntity::class.java)?.toDomain()
 
     override fun save(article: Article): Article =
-        mongoOperations.save(article)
+        mongoOperations.save(ArticleEntity.from(article)).toDomain()
 }
