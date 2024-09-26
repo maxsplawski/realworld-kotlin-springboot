@@ -7,4 +7,6 @@ interface ArticleRepository {
     fun findById(id: ArticleId): Article?
 
     fun save(article: Article): Article
+    
+    fun saveAll(articles: List<Article>): Unit
 }
