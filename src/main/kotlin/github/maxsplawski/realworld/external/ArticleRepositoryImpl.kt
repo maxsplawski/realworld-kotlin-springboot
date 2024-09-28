@@ -19,4 +19,8 @@ class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : Arti
 
     override fun save(article: Article): Article =
         mongoOperations.save(ArticleEntity.from(article)).toDomain()
+
+    override fun saveAll(articles: List<Article>) {
+        mongoOperations.insertAll(articles.map { ArticleEntity.from(it) })
+    }
 }
