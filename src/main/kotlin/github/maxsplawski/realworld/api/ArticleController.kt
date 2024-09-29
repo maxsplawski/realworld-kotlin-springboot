@@ -16,7 +16,6 @@ class ArticleController(private val facade: ArticleFacade) {
     fun getArticles(@ModelAttribute articlesRequest: ArticlesRequest) =
         facade.getArticles(articlesRequest)
 
-
     @GetMapping(
         value = ["/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE]
