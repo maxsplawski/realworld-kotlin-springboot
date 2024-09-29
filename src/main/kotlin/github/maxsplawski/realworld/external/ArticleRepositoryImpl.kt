@@ -5,13 +5,32 @@ import github.maxsplawski.realworld.domain.ArticleId
 import github.maxsplawski.realworld.domain.ArticleRepository
 import github.maxsplawski.realworld.domain.ArticlesFilter
 import org.springframework.data.mongodb.core.MongoOperations
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.stereotype.Repository
 
 @Repository
 class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : ArticleRepository {
 
     override fun findAll(articlesFilter: ArticlesFilter): List<Article> {
-        TODO("Not yet implemented")
+        val query = Query()
+
+        with(articlesFilter) {
+            favorited?.let {
+                query.addCriteria(Criteria.where("favorited").`in`(it))
+            }
+            author?.let {
+                query.addCriteria(Criteria.where("author").`is`(it))
+            }
+            tag?.let {
+                query.addCriteria(Criteria.where("tags").`in`(it))
+            }
+            query.with(pageable)
+        }
+
+        return mongoOperations
+            .find(query, ArticleEntity::class.java)
+            .map { it.toDomain() }
     }
 
     override fun findById(id: ArticleId): Article? =
