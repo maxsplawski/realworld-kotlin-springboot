@@ -42,4 +42,9 @@ class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : Arti
     override fun saveAll(articles: List<Article>) {
         mongoOperations.insertAll(articles.map { ArticleEntity.from(it) })
     }
+
+    override fun delete(id: ArticleId) {
+        val query = Query(Criteria.where("_id").`is`(id.value))
+        mongoOperations.remove(query, ArticleEntity::class.java)
+    }
 }
