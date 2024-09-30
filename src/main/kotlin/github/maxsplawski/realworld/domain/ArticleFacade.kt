@@ -21,4 +21,7 @@ class ArticleFacade(private val articleRepository: ArticleRepository) {
         val article = Article.from(articleDto)
         return articleRepository.save(article).toDto()
     }
+
+    fun deleteArticle(id: ArticleId) =
+        articleRepository.delete(id)
 }

@@ -17,7 +17,7 @@ class ArticleController(private val facade: ArticleFacade) {
         facade.getArticles(articlesRequest)
 
     @GetMapping(
-        value = ["/{id}"],
+        path = ["/{id}"],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
     fun getArticle(@PathVariable id: ArticleId) =
@@ -32,5 +32,10 @@ class ArticleController(private val facade: ArticleFacade) {
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(article)
+    }
+
+    @DeleteMapping(path = ["/{id}"])
+    fun deleteArticle(@PathVariable id: ArticleId) {
+        facade.deleteArticle(id)
     }
 }
