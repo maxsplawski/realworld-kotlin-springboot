@@ -34,6 +34,12 @@ class ArticleController(private val facade: ArticleFacade) {
             .body(article)
     }
 
+    @PutMapping(
+        consumes = [MediaType.APPLICATION_JSON_VALUE],
+        produces = [MediaType.APPLICATION_JSON_VALUE]
+    )
+    fun updateArticle(): Nothing = TODO()
+
     @DeleteMapping(path = ["/{id}"])
     fun deleteArticle(@PathVariable id: ArticleId) {
         facade.deleteArticle(id)
