@@ -10,5 +10,7 @@ interface ArticleRepository {
 
     fun saveAll(articles: List<Article>): Unit
 
+    fun update(article: Article): Article
+
     fun delete(id: ArticleId): Unit
 }
