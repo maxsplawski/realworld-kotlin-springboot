@@ -50,4 +50,9 @@ class ArticleFacadeTest {
         // then
         assertThat(result).isEqualTo(expectedArticleDto)
     }
+    
+    @Test
+    fun `should save and return article`() {
+        TODO()
+    }
 }
