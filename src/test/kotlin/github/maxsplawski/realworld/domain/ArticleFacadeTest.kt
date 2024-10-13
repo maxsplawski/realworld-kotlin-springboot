@@ -1,13 +1,13 @@
 package github.maxsplawski.realworld.domain
 
-import github.maxsplawski.realworld.api.ArticleDto
+import github.maxsplawski.realworld.api.ArticlesRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 
@@ -33,14 +33,26 @@ class ArticleFacadeTest {
     }
 
     @Test
-    fun `should get article`() {
+    fun `should return list of articles mapped to dtos`() {
         // given
-        val expectedArticleDto = ArticleDto(
-            id = "id",
-            title = "title",
-            body = "body",
-            description = "description",
-        )
+        val request = ArticlesRequest()
+        val articles = listOf(existingArticle, existingArticle.copy(ArticleId("id2")))
+        val articleDtos = articles.map { it.toDto() }
+
+        `when`(repository.findAll(ArticlesFilter.from(request))).thenReturn(articles)
+
+        // when
+        val result = facade.getArticles(request)
+
+        // then
+        assertThat(result).hasSize(2)
+        assertThat(result).isEqualTo(articleDtos)
+    }
+
+    @Test
+    fun `should return article mapped to dto when it exists`() {
+        // given
+        val articleDto = existingArticle.toDto()
 
         `when`(repository.findById(existingArticle.id)).thenReturn(existingArticle)
 
@@ -48,9 +60,22 @@ class ArticleFacadeTest {
         val result = facade.getArticle(existingArticle.id)
 
         // then
-        assertThat(result).isEqualTo(expectedArticleDto)
+        assertThat(result).isEqualTo(articleDto)
     }
-    
+
+    @Test
+    fun `should throw exception when article does not exist`() {
+        // given
+        val id = ArticleId("id")
+        `when`(repository.findById(id)).thenReturn(null)
+
+        // expect
+        val exception = assertThrows<ArticleNotFoundException> {
+            facade.getArticle(id)
+        }
+        assertThat(exception.message).isEqualTo("Article with id: 'id' not found")
+    }
+
     @Test
     fun `should save and return article`() {
         TODO()
