@@ -1,40 +1,40 @@
 package github.maxsplawski.realworld.configuration
 
-import github.maxsplawski.realworld.domain.Article
-import github.maxsplawski.realworld.domain.ArticleId
-import github.maxsplawski.realworld.domain.ArticleRepository
+import github.maxsplawski.realworld.external.ArticleEntity
+import jakarta.annotation.PreDestroy
 import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
+import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Component
 
 @Component
 class DataInitializer(
-    private val articleRepository: ArticleRepository
+    private val mongoTemplate: MongoTemplate,
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
         val articles = listOf(
-            Article(
-                ArticleId(ObjectId.get().toString()),
+            ArticleEntity(
+                ObjectId.get(),
                 "article1",
                 "article1 description",
                 "article 1 body",
             ),
-            Article(
-                ArticleId(ObjectId.get().toString()),
+            ArticleEntity(
+                ObjectId.get(),
                 "article2",
                 "article2 description",
                 "article 2 body",
             ),
-            Article(
-                ArticleId(ObjectId.get().toString()),
+            ArticleEntity(
+                ObjectId.get(),
                 "article3",
                 "article3 description",
                 "article 3 body",
             ),
-            Article(
-                ArticleId(ObjectId.get().toString()),
+            ArticleEntity(
+                ObjectId.get(),
                 "article4",
                 "article4 description",
                 "article 4 body",
@@ -42,8 +42,15 @@ class DataInitializer(
         )
 
         logger.info("Initializing data: $articles.")
-        articleRepository.saveAll(articles)
+        mongoTemplate.insertAll(articles)
         logger.info("Initialization complete.")
+    }
+
+    @PreDestroy
+    fun clearData() {
+        with(mongoTemplate.db) {
+            getCollection("articles").drop()
+        }
     }
 
     companion object {

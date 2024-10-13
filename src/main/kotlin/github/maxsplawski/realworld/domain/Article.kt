@@ -1,6 +1,7 @@
 package github.maxsplawski.realworld.domain
 
 import github.maxsplawski.realworld.api.ArticleDto
+import org.bson.types.ObjectId
 
 data class Article(
     val id: ArticleId,
@@ -28,3 +29,5 @@ fun Article.toDto() =
         description = description,
         body = body,
     )
+
+fun ArticleId.toObjectId() = ObjectId(this.value)

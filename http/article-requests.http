@@ -1,0 +1,26 @@
+###
+# @name GetArticlesRequest
+GET http://localhost:8080/api/articles
+Accept: application/json
+
+###
+# @name GetArticleRequest
+GET http://localhost:8080/api/articles/670ac563261c3b05a7b607ca
+Accept: application/json
+
+###
+# @name CreateArticleRequest
+POST http://localhost:8080/api/articles
+Accept: application/json
+Content-Type: application/json
+
+###
+# @name UpdateArticleRequest
+PUT http://localhost:8080/api/670ac563261c3b05a7b607ca
+Accept: application/json
+Content-Type: application/json
+
+###
+# @name DeleteArticleRequest
+DELETE http://localhost:8080/api/articles/670ac563261c3b05a7b607ca
+Accept: application/json
