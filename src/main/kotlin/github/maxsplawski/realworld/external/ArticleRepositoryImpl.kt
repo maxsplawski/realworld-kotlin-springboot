@@ -4,6 +4,7 @@ import github.maxsplawski.realworld.domain.Article
 import github.maxsplawski.realworld.domain.ArticleId
 import github.maxsplawski.realworld.domain.ArticleRepository
 import github.maxsplawski.realworld.domain.ArticlesFilter
+import github.maxsplawski.realworld.domain.toObjectId
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
@@ -34,7 +35,7 @@ class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : Arti
     }
 
     override fun findById(id: ArticleId): Article? =
-        mongoOperations.findById(id, ArticleEntity::class.java)?.toDomain()
+        mongoOperations.findById(id.toObjectId(), ArticleEntity::class.java)?.toDomain()
 
     override fun save(article: Article): Article =
         mongoOperations.save(ArticleEntity.from(article)).toDomain()
@@ -48,7 +49,7 @@ class ArticleRepositoryImpl(private val mongoOperations: MongoOperations) : Arti
     }
 
     override fun delete(id: ArticleId) {
-        val query = Query(Criteria.where("_id").`is`(id.value))
+        val query = Query(Criteria.where("_id").`is`(id.toObjectId()))
         mongoOperations.remove(query, ArticleEntity::class.java)
     }
 }

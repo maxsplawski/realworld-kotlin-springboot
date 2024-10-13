@@ -7,15 +7,14 @@ import org.springframework.stereotype.Component
 @Component
 class ArticleFacade(private val articleRepository: ArticleRepository) {
 
-    fun getArticles(articlesRequest: ArticlesRequest): List<ArticleDto> {
-        return articleRepository
+    fun getArticles(articlesRequest: ArticlesRequest) =
+        articleRepository
             .findAll(ArticlesFilter.from(articlesRequest))
             .map { it.toDto() }
-    }
 
-    fun getArticle(id: ArticleId): ArticleDto? {
-        return articleRepository.findById(id)?.toDto()
-    }
+    fun getArticle(id: ArticleId) =
+        articleRepository.findById(id)?.toDto()
+            ?: throw ArticleNotFoundException("Article with id: '$id' not found")
 
     fun createArticle(articleDto: ArticleDto): ArticleDto {
         val article = Article.from(articleDto)
