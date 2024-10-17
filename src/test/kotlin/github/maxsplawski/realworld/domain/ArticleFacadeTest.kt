@@ -55,4 +55,9 @@ class ArticleFacadeTest {
     fun `should save and return article`() {
         TODO()
     }
+
+    @Test
+    fun `should update and return article`() {
+        TODO()
+    }
 }
