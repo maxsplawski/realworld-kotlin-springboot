@@ -5,10 +5,12 @@ import jakarta.annotation.PreDestroy
 import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
+import org.springframework.context.annotation.Profile
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Component
 
 @Component
+@Profile("development")
 class DataInitializer(
     private val mongoTemplate: MongoTemplate,
 ) : CommandLineRunner {
