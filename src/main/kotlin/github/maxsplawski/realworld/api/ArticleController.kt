@@ -12,8 +12,14 @@ import org.springframework.web.bind.annotation.*
 class ArticleController(private val facade: ArticleFacade) {
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getArticles(@ModelAttribute articlesRequest: ArticlesRequest) =
-        facade.getArticles(articlesRequest)
+    fun getArticles(
+        @ModelAttribute articlesRequest: ArticlesRequest
+    ): ResponseEntity<Map<String, List<ArticleDto>>> {
+        val articles = facade.getArticles(articlesRequest)
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(mapOf("articles" to articles))
+    }
 
     @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getArticle(@PathVariable id: ArticleId): ResponseEntity<Map<String, ArticleDto>> {

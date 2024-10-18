@@ -14,7 +14,7 @@ class ArticleFacade(private val articleRepository: ArticleRepository) {
 
     fun getArticle(id: ArticleId) =
         articleRepository.findById(id)?.toDto()
-            ?: throw ArticleNotFoundException("Article with id: '$id' not found")
+            ?: throw ArticleNotFoundException("Article with id: '${id.value}' not found")
 
     fun createArticle(articleDto: ArticleDto): ArticleDto {
         val article = Article.from(articleDto)
