@@ -63,4 +63,9 @@ class ArticleControllerTest {
             .andExpect { jsonPath("$.article.body") { value(article.body) } }
             .andExpect { jsonPath("$.article.description") { value(article.description) } }
     }
+
+    @Test
+    fun `should update an article`() {
+        TODO()
+    }
 }
