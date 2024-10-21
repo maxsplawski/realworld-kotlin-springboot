@@ -14,6 +14,7 @@ Accept: application/json
 POST http://localhost:8080/api/articles
 Accept: application/json
 Content-Type: application/json
+{ "title": "Title", "description": "Description", "body": "Body" }
 
 ###
 # @name UpdateArticleRequest
