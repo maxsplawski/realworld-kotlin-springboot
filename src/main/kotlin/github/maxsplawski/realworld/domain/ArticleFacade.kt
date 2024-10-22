@@ -18,10 +18,17 @@ class ArticleFacade(private val articleRepository: ArticleRepository) {
 
     fun createArticle(articleDto: ArticleDto): ArticleDto {
         val article = Article.from(articleDto)
-        return articleRepository.save(article).toDto()
+        return articleRepository
+            .save(article)
+            .toDto()
     }
 
-    fun updateArticle(): Nothing = TODO()
+    fun updateArticle(articleDto: ArticleDto): ArticleDto {
+        val article = Article.from(articleDto)
+        return articleRepository
+            .update(article)
+            .toDto()
+    }
 
     fun deleteArticle(id: ArticleId) =
         articleRepository.delete(id)

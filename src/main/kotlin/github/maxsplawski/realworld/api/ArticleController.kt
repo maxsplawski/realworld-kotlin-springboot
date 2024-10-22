@@ -39,7 +39,12 @@ class ArticleController(private val facade: ArticleFacade) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun updateArticle(): Nothing = TODO()
+    fun updateArticle(@RequestBody articleDto: ArticleDto): ResponseEntity<Map<String, ArticleDto>> {
+        val article = facade.updateArticle(articleDto)
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(mapOf("article" to article))
+    }
 
     @DeleteMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun deleteArticle(@PathVariable id: ArticleId): ResponseEntity<Void> {
