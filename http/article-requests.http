@@ -22,6 +22,8 @@ PUT http://localhost:8080/api/670ac563261c3b05a7b607ca
 Accept: application/json
 Content-Type: application/json
 
+{ "title": "Title", "description": "Description", "body": "Body" }
+
 ###
 # @name DeleteArticleRequest
 DELETE http://localhost:8080/api/articles/670ac563261c3b05a7b607ca
