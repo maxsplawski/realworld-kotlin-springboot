@@ -2,6 +2,7 @@ package github.maxsplawski.realworld.domain
 
 import github.maxsplawski.realworld.api.ArticleDto
 import github.maxsplawski.realworld.api.ArticlesRequest
+import github.maxsplawski.realworld.api.CreateArticleRequest
 import org.springframework.stereotype.Component
 
 @Component
@@ -16,8 +17,8 @@ class ArticleFacade(private val articleRepository: ArticleRepository) {
         articleRepository.findById(id)?.toDto()
             ?: throw ArticleNotFoundException("Article with id: '${id.value}' not found")
 
-    fun createArticle(articleDto: ArticleDto): ArticleDto {
-        val article = Article.from(articleDto)
+    fun createArticle(requestBody: CreateArticleRequest): ArticleDto {
+        val article = Article.from(requestBody)
         return articleRepository
             .save(article)
             .toDto()

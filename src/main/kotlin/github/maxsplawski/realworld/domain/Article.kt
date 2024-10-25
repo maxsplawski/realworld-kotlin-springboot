@@ -1,6 +1,7 @@
 package github.maxsplawski.realworld.domain
 
 import github.maxsplawski.realworld.api.ArticleDto
+import github.maxsplawski.realworld.api.CreateArticleRequest
 import org.bson.types.ObjectId
 
 data class Article(
@@ -10,11 +11,11 @@ data class Article(
     val body: String,
 ) {
     companion object {
-        fun from(dto: ArticleDto) = Article(
-            id = ArticleId(dto.id),
-            title = dto.title,
-            description = dto.description,
-            body = dto.body,
+        fun from(requestBody: CreateArticleRequest) = Article(
+            id = ArticleId(ObjectId().toString()),
+            title = requestBody.title,
+            description = requestBody.description,
+            body = requestBody.body,
         )
     }
 }
