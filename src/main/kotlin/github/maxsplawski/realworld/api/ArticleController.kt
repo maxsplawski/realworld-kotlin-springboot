@@ -33,8 +33,8 @@ class ArticleController(private val facade: ArticleFacade) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun createArticle(@RequestBody articleDto: ArticleDto): ResponseEntity<Map<String, ArticleDto>> {
-        val article = facade.createArticle(articleDto)
+    fun createArticle(@RequestBody requestBody: CreateArticleRequest): ResponseEntity<Map<String, ArticleDto>> {
+        val article = facade.createArticle(requestBody)
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(mapOf("article" to article))
