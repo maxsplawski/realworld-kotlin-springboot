@@ -12,9 +12,7 @@ import org.springframework.web.bind.annotation.*
 class ArticleController(private val facade: ArticleFacade) {
 
     @GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
-    fun getArticles(
-        @ModelAttribute articlesRequest: ArticlesRequest
-    ): ResponseEntity<Map<String, List<ArticleDto>>> {
+    fun getArticles(@ModelAttribute articlesRequest: ArticlesRequest): ResponseEntity<Map<String, List<ArticleDto>>> {
         val articles = facade.getArticles(articlesRequest)
         return ResponseEntity
             .status(HttpStatus.OK)
@@ -33,8 +31,8 @@ class ArticleController(private val facade: ArticleFacade) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun createArticle(@RequestBody requestBody: CreateArticleRequest): ResponseEntity<Map<String, ArticleDto>> {
-        val article = facade.createArticle(requestBody)
+    fun createArticle(@RequestBody createArticleRequest: CreateArticleRequest): ResponseEntity<Map<String, ArticleDto>> {
+        val article = facade.createArticle(createArticleRequest)
         return ResponseEntity
             .status(HttpStatus.CREATED)
             .body(mapOf("article" to article))
@@ -45,8 +43,11 @@ class ArticleController(private val facade: ArticleFacade) {
         consumes = [MediaType.APPLICATION_JSON_VALUE],
         produces = [MediaType.APPLICATION_JSON_VALUE]
     )
-    fun updateArticle(@RequestBody articleDto: ArticleDto): ResponseEntity<Map<String, ArticleDto>> {
-        val article = facade.updateArticle(articleDto)
+    fun updateArticle(
+        @PathVariable id: ArticleId,
+        @RequestBody updateArticleRequest: UpdateArticleRequest
+    ): ResponseEntity<Map<String, ArticleDto>> {
+        val article = facade.updateArticle(id, updateArticleRequest)
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(mapOf("article" to article))
