@@ -26,6 +26,6 @@ data class ArticlesFilter(
 
         private const val OFFSET = 0;
         private const val LIMIT = 20;
-        private const val CREATED_AT_FIELD = "createAt";
+        private const val CREATED_AT_FIELD = "createdAt";
     }
 }

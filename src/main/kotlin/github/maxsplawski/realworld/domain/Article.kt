@@ -2,6 +2,7 @@ package github.maxsplawski.realworld.domain
 
 import github.maxsplawski.realworld.api.ArticleDto
 import github.maxsplawski.realworld.api.CreateArticleRequest
+import github.maxsplawski.realworld.api.UpdateArticleRequest
 import org.bson.types.ObjectId
 
 data class Article(
@@ -11,11 +12,25 @@ data class Article(
     val body: String,
 ) {
     companion object {
-        fun from(requestBody: CreateArticleRequest) = Article(
-            id = ArticleId(ObjectId().toString()),
-            title = requestBody.title,
-            description = requestBody.description,
-            body = requestBody.body,
+        fun from(createArticleRequest: CreateArticleRequest) = Article(
+            id = ObjectId().toArticleId(),
+            title = createArticleRequest.title,
+            description = createArticleRequest.description,
+            body = createArticleRequest.body,
+        )
+    }
+}
+
+data class ArticleUpdate(
+    val title: String?,
+    val description: String?,
+    val body: String?,
+) {
+    companion object {
+        fun from(updateArticleRequest: UpdateArticleRequest) = ArticleUpdate(
+            title = updateArticleRequest.title,
+            description = updateArticleRequest.description,
+            body = updateArticleRequest.body,
         )
     }
 }
@@ -32,3 +47,5 @@ fun Article.toDto() =
     )
 
 fun ArticleId.toObjectId() = ObjectId(this.value)
+
+fun ObjectId.toArticleId() = ArticleId(this.toString())

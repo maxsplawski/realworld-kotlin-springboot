@@ -8,9 +8,9 @@ interface ArticleRepository {
 
     fun save(article: Article): Article
 
-    fun saveAll(articles: List<Article>): Unit
+    fun saveAll(articles: List<Article>)
 
-    fun update(article: Article): Article
+    fun update(id: ArticleId, articleUpdate: ArticleUpdate): Article?
 
     fun delete(id: ArticleId): Unit
 }
