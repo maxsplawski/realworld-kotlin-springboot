@@ -2,26 +2,36 @@
   {
     "title": "article1",
     "description": "article1 description",
-    "body": "article1 body"
+    "body": "article1 body",
+    "createdAt": "2024-10-27T12:00:00.000Z",
+    "updatedAt": "2024-10-27T12:00:00.000Z"
   },
   {
     "title": "article2",
     "description": "article2 description",
-    "body": "article2 body"
+    "body": "article2 body",
+    "createdAt": "2024-10-27T12:00:00.000Z",
+    "updatedAt": "2024-10-27T12:00:00.000Z"
   },
   {
     "title": "article3",
     "description": "article3 description",
-    "body": "article3 body"
+    "body": "article3 body",
+    "createdAt": "2024-10-27T12:00:00.000Z",
+    "updatedAt": "2024-10-27T12:00:00.000Z"
   },
   {
     "title": "article4",
     "description": "article4 description",
-    "body": "article4 body"
+    "body": "article4 body",
+    "createdAt": "2024-10-27T12:00:00.000Z",
+    "updatedAt": "2024-10-27T12:00:00.000Z"
   },
   {
     "title": "article5",
     "description": "article5 description",
-    "body": "article5 body"
+    "body": "article5 body",
+    "createdAt": "2024-10-27T12:00:00.000Z",
+    "updatedAt": "2024-10-27T12:00:00.000Z"
   }
 ]

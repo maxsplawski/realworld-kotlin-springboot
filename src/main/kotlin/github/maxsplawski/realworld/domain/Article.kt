@@ -4,12 +4,15 @@ import github.maxsplawski.realworld.api.ArticleDto
 import github.maxsplawski.realworld.api.CreateArticleRequest
 import github.maxsplawski.realworld.api.UpdateArticleRequest
 import org.bson.types.ObjectId
+import java.time.Instant
 
 data class Article(
     val id: ArticleId,
     val title: String,
     val description: String,
     val body: String,
+    val createdAt: Instant,
+    val updatedAt: Instant,
 ) {
     companion object {
         fun from(createArticleRequest: CreateArticleRequest) = Article(
@@ -17,6 +20,8 @@ data class Article(
             title = createArticleRequest.title,
             description = createArticleRequest.description,
             body = createArticleRequest.body,
+            createdAt = Instant.now(),
+            updatedAt = Instant.now(),
         )
     }
 }
@@ -44,6 +49,8 @@ fun Article.toDto() =
         title = title,
         description = description,
         body = body,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
     )
 
 fun ArticleId.toObjectId() = ObjectId(this.value)

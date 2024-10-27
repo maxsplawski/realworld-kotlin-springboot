@@ -6,6 +6,7 @@ import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias
 import org.springframework.data.mongodb.core.mapping.Document
+import java.time.Instant
 
 @TypeAlias("Article")
 @Document("articles")
@@ -14,14 +15,18 @@ data class ArticleEntity(
     val title: String,
     val description: String,
     val body: String,
+    val createdAt: Instant,
+    val updatedAt: Instant,
 ) {
     companion object {
         fun from(article: Article) =
             ArticleEntity(
-                ObjectId(article.id.value),
-                article.title,
-                article.description,
-                article.body,
+                id = ObjectId(article.id.value),
+                title = article.title,
+                description = article.description,
+                body = article.body,
+                createdAt = article.createdAt,
+                updatedAt = article.updatedAt,
             )
     }
 }
@@ -32,4 +37,6 @@ fun ArticleEntity.toDomain() =
         title = title,
         description = description,
         body = body,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
     )

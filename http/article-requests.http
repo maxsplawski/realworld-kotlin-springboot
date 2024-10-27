@@ -1,6 +1,8 @@
 ###
 # @name GetArticlesRequest
-GET http://localhost:8080/api/articles?offset=0&limit=5
+GET http://localhost:8080/api/articles
+    ?offset=0
+    &limit=2
 
 Accept: application/json
 
