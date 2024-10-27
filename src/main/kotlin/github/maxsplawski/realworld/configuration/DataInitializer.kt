@@ -1,51 +1,33 @@
 package github.maxsplawski.realworld.configuration
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import github.maxsplawski.realworld.external.ArticleEntity
 import jakarta.annotation.PreDestroy
-import org.bson.types.ObjectId
 import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Profile
+import org.springframework.core.io.ClassPathResource
 import org.springframework.data.mongodb.core.MongoTemplate
 import org.springframework.stereotype.Component
+import kotlin.time.measureTime
 
 @Component
-@Profile("development")
+@Profile("dev")
 class DataInitializer(
+    private val objectMapper: ObjectMapper,
     private val mongoTemplate: MongoTemplate,
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
-        val articles = listOf(
-            ArticleEntity(
-                ObjectId.get(),
-                "article1",
-                "article1 description",
-                "article 1 body",
-            ),
-            ArticleEntity(
-                ObjectId.get(),
-                "article2",
-                "article2 description",
-                "article 2 body",
-            ),
-            ArticleEntity(
-                ObjectId.get(),
-                "article3",
-                "article3 description",
-                "article 3 body",
-            ),
-            ArticleEntity(
-                ObjectId.get(),
-                "article4",
-                "article4 description",
-                "article 4 body",
-            ),
-        )
-
-        logger.info("Initializing data: $articles.")
-        mongoTemplate.insertAll(articles)
-        logger.info("Initialization complete.")
+        logger.info("Initializing data")
+        var articles: List<ArticleEntity>
+        val elapsedTime = measureTime {
+            val resource = ClassPathResource("json/articles.json")
+            articles = objectMapper.readValue(resource.inputStream, Array<ArticleEntity>::class.java)
+                .toList()
+            mongoTemplate.insertAll(articles)
+        }
+        logger.info("Initialized data: $articles in ${elapsedTime.inWholeMilliseconds} ms")
     }
 
     @PreDestroy
