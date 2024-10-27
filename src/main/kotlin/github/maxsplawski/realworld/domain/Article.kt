@@ -11,6 +11,7 @@ data class Article(
     val title: String,
     val description: String,
     val body: String,
+    val tagList: List<String>?,
     val createdAt: Instant,
     val updatedAt: Instant,
 ) {
@@ -20,6 +21,7 @@ data class Article(
             title = createArticleRequest.title,
             description = createArticleRequest.description,
             body = createArticleRequest.body,
+            tagList = createArticleRequest.tagList,
             createdAt = Instant.now(),
             updatedAt = Instant.now(),
         )
@@ -49,6 +51,7 @@ fun Article.toDto() =
         title = title,
         description = description,
         body = body,
+        tagList = tagList,
         createdAt = createdAt,
         updatedAt = updatedAt,
     )

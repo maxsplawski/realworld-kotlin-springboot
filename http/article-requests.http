@@ -2,7 +2,7 @@
 # @name GetArticlesRequest
 GET http://localhost:8080/api/articles
     ?offset=0
-    &limit=2
+    &limit=5
 
 Accept: application/json
 
@@ -20,7 +20,10 @@ Content-Type: application/json
 {
   "title": "Title",
   "description": "Description",
-  "body": "Body"
+  "body": "Body",
+  "tagList": [
+    "Tag"
+  ]
 }
 
 ###
@@ -30,9 +33,9 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "title": "Title",
-  "description": "Description",
-  "body": "Body"
+  "title": "Title updated",
+  "description": "Description updated",
+  "body": "Body updated"
 }
 
 ###

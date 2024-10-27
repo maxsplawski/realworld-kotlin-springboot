@@ -7,6 +7,7 @@ data class ArticleDto(
     val title: String,
     val description: String,
     val body: String,
+    val tagList: List<String>?,
     val createdAt: Instant,
     val updatedAt: Instant,
 )

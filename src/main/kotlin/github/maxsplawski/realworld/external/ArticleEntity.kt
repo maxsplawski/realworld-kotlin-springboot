@@ -15,6 +15,7 @@ data class ArticleEntity(
     val title: String,
     val description: String,
     val body: String,
+    val tagList: List<String>?,
     val createdAt: Instant,
     val updatedAt: Instant,
 ) {
@@ -25,6 +26,7 @@ data class ArticleEntity(
                 title = article.title,
                 description = article.description,
                 body = article.body,
+                tagList = article.tagList,
                 createdAt = article.createdAt,
                 updatedAt = article.updatedAt,
             )
@@ -37,6 +39,7 @@ fun ArticleEntity.toDomain() =
         title = title,
         description = description,
         body = body,
+        tagList = tagList,
         createdAt = createdAt,
         updatedAt = updatedAt,
     )
