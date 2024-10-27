@@ -6,6 +6,7 @@ import github.maxsplawski.realworld.domain.ArticleRepository
 import github.maxsplawski.realworld.domain.ArticleUpdate
 import github.maxsplawski.realworld.domain.ArticlesFilter
 import github.maxsplawski.realworld.domain.toObjectId
+import org.springframework.data.mongodb.core.FindAndModifyOptions
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
@@ -49,21 +50,22 @@ class MongoArticleRepository(private val mongoOperations: MongoOperations) : Art
     override fun update(id: ArticleId, articleUpdate: ArticleUpdate): Article? {
         val query = Query(Criteria.where("_id").`is`(id.toObjectId()))
         val update = Update()
+        val options = FindAndModifyOptions.options().returnNew(true)
 
         with(articleUpdate) {
             title?.let {
-                update.set(it, "title")
+                update.set("title", it)
             }
             description?.let {
-                update.set(it, "description")
+                update.set("description", it)
             }
             body?.let {
-                update.set(it, "body")
+                update.set("body", it)
             }
         }
 
         return mongoOperations
-            .findAndModify(query, update, ArticleEntity::class.java)
+            .findAndModify(query, update, options, ArticleEntity::class.java)
             ?.toDomain()
     }
 
