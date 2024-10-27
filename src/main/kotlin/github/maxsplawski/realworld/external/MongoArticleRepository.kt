@@ -12,6 +12,7 @@ import org.springframework.data.mongodb.core.query.Criteria
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.data.mongodb.core.query.Update
 import org.springframework.stereotype.Repository
+import java.time.Instant
 
 @Repository
 class MongoArticleRepository(private val mongoOperations: MongoOperations) : ArticleRepository {
@@ -62,6 +63,7 @@ class MongoArticleRepository(private val mongoOperations: MongoOperations) : Art
             body?.let {
                 update.set("body", it)
             }
+            update.set("updatedAt", Instant.now())
         }
 
         return mongoOperations
