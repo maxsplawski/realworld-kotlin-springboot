@@ -34,8 +34,7 @@ Content-Type: application/json
 
 {
   "title": "Title updated",
-  "description": "Description updated",
-  "body": "Body updated"
+  "description": "Description updated"
 }
 
 ###
