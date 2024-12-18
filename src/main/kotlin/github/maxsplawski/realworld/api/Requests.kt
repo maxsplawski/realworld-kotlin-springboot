@@ -20,3 +20,5 @@ data class UpdateArticleRequest(
     val description: String?,
     val body: String?,
 )
+
+data class CreateCommentRequest(val body: String)
