@@ -1,5 +1,16 @@
 ###
-GET http://localhost:8080/api/articles
+# @name GetCommentsRequest
+GET http://localhost:8080/api/articles/670ac563261c3b05a7b607ca/comments
+
+Accept: application/json
 
 ###
-POST http://localhost:8080/{{id}}/comments
+# @name CreateCommentRequest
+POST http://localhost:8080/670ac563261c3b05a7b607ca/comments
+
+Accept: application/json
+Content-Type: application/json
+
+{
+  "body": "His name was my name too."
+}
