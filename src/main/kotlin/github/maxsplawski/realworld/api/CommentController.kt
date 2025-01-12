@@ -19,4 +19,9 @@ class CommentController {
     fun createComment(@PathVariable slug: String, @RequestBody createCommentRequest: CreateCommentRequest) {
         TODO("Not yet implemented")
     }
+
+    @DeleteMapping("/{slug}/comments/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun deleteComment(@PathVariable slug: String, @PathVariable id: String) {
+        TODO("Not yet implemented")
+    }
 }
