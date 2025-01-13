@@ -7,7 +7,7 @@ import github.maxsplawski.realworld.api.UpdateArticleRequest
 import org.springframework.stereotype.Component
 
 @Component
-class ArticleFacade(private val articleRepository: ArticleRepository) {
+class ArticleService(private val articleRepository: ArticleRepository) {
 
     fun getArticles(articlesRequest: ArticlesRequest) =
         articleRepository
