@@ -1,6 +1,6 @@
 package github.maxsplawski.realworld.api
 
-import github.maxsplawski.realworld.domain.ArticleFacade
+import github.maxsplawski.realworld.domain.ArticleService
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`
@@ -18,7 +18,7 @@ class ArticleControllerTest {
     private lateinit var mockMvc: MockMvc
 
     @MockBean
-    private lateinit var facade: ArticleFacade
+    private lateinit var facade: ArticleService
 
     @Test
     fun `should return an article`() {

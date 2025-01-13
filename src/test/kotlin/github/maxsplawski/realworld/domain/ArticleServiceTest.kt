@@ -12,13 +12,13 @@ import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
 
 @ExtendWith(MockitoExtension::class)
-class ArticleFacadeTest {
+class ArticleServiceTest {
 
     @Mock
     private lateinit var repository: ArticleRepository
 
     @InjectMocks
-    private lateinit var facade: ArticleFacade
+    private lateinit var service: ArticleService
 
     private lateinit var existingArticle: Article
 
@@ -42,7 +42,7 @@ class ArticleFacadeTest {
         `when`(repository.findAll(ArticlesFilter.from(request))).thenReturn(articles)
 
         // when
-        val result = facade.getArticles(request)
+        val result = service.getArticles(request)
 
         // then
         assertThat(result).hasSize(2)
@@ -57,7 +57,7 @@ class ArticleFacadeTest {
         `when`(repository.findById(existingArticle.id)).thenReturn(existingArticle)
 
         // when
-        val result = facade.getArticle(existingArticle.id)
+        val result = service.getArticle(existingArticle.id)
 
         // then
         assertThat(result).isEqualTo(articleDto)
@@ -71,7 +71,7 @@ class ArticleFacadeTest {
 
         // expect
         val exception = assertThrows<ArticleNotFoundException> {
-            facade.getArticle(id)
+            service.getArticle(id)
         }
         assertThat(exception.message).isEqualTo("Article with id: 'id' not found")
     }
