@@ -1,9 +1,10 @@
-package github.maxsplawski.realworld.domain
+package github.maxsplawski.realworld.domain.article
 
 import github.maxsplawski.realworld.api.ArticleDto
 import github.maxsplawski.realworld.api.ArticlesRequest
 import github.maxsplawski.realworld.api.CreateArticleRequest
 import github.maxsplawski.realworld.api.UpdateArticleRequest
+import github.maxsplawski.realworld.domain.ArticleNotFoundException
 import org.springframework.stereotype.Component
 
 @Component

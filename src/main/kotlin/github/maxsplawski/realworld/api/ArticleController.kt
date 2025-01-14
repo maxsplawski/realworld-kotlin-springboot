@@ -1,7 +1,7 @@
 package github.maxsplawski.realworld.api
 
-import github.maxsplawski.realworld.domain.ArticleId
-import github.maxsplawski.realworld.domain.ArticleService
+import github.maxsplawski.realworld.domain.article.ArticleId
+import github.maxsplawski.realworld.domain.article.ArticleService
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity

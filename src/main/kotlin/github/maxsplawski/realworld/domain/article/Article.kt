@@ -1,4 +1,4 @@
-package github.maxsplawski.realworld.domain
+package github.maxsplawski.realworld.domain.article
 
 import github.maxsplawski.realworld.api.ArticleDto
 import github.maxsplawski.realworld.api.CreateArticleRequest

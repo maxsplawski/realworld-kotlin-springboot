@@ -1,11 +1,6 @@
 package github.maxsplawski.realworld.external
 
-import github.maxsplawski.realworld.domain.Article
-import github.maxsplawski.realworld.domain.ArticleId
-import github.maxsplawski.realworld.domain.ArticleRepository
-import github.maxsplawski.realworld.domain.ArticleUpdate
-import github.maxsplawski.realworld.domain.ArticlesFilter
-import github.maxsplawski.realworld.domain.toObjectId
+import github.maxsplawski.realworld.domain.article.*
 import org.springframework.data.mongodb.core.FindAndModifyOptions
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Criteria
