@@ -1,7 +1,7 @@
 package github.maxsplawski.realworld.external
 
-import github.maxsplawski.realworld.domain.Article
-import github.maxsplawski.realworld.domain.ArticleId
+import github.maxsplawski.realworld.domain.article.Article
+import github.maxsplawski.realworld.domain.article.ArticleId
 import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.annotation.TypeAlias

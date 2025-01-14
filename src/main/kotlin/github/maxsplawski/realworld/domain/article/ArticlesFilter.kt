@@ -1,4 +1,4 @@
-package github.maxsplawski.realworld.domain
+package github.maxsplawski.realworld.domain.article
 
 import github.maxsplawski.realworld.api.ArticlesRequest
 import org.springframework.data.domain.PageRequest

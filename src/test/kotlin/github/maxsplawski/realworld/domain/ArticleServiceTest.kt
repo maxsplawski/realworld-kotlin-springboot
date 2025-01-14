@@ -1,6 +1,7 @@
 package github.maxsplawski.realworld.domain
 
 import github.maxsplawski.realworld.api.ArticlesRequest
+import github.maxsplawski.realworld.domain.article.*
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

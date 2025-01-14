@@ -1,6 +1,6 @@
 package github.maxsplawski.realworld.api
 
-import github.maxsplawski.realworld.domain.ArticleService
+import github.maxsplawski.realworld.domain.article.ArticleService
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.any
 import org.mockito.Mockito.`when`

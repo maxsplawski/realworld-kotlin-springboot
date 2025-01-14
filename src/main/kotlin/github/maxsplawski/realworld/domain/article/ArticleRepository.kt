@@ -1,4 +1,4 @@
-package github.maxsplawski.realworld.domain
+package github.maxsplawski.realworld.domain.article
 
 interface ArticleRepository {
 
