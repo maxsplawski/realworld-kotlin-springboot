@@ -6,6 +6,8 @@ interface ArticleRepository {
 
     fun findById(id: ArticleId): Article?
 
+    fun findBySlug(slug: String): Article?
+
     fun save(article: Article): Article
 
     fun saveAll(articles: List<Article>)

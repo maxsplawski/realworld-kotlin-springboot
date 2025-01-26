@@ -58,7 +58,7 @@ class ArticleServiceTest {
         `when`(repository.findById(existingArticle.id)).thenReturn(existingArticle)
 
         // when
-        val result = service.getArticle(existingArticle.id)
+        val result = service.getArticleById(existingArticle.id)
 
         // then
         assertThat(result).isEqualTo(articleDto)
@@ -72,7 +72,7 @@ class ArticleServiceTest {
 
         // expect
         val exception = assertThrows<ArticleNotFoundException> {
-            service.getArticle(id)
+            service.getArticleById(id)
         }
         assertThat(exception.message).isEqualTo("Article with id: 'id' not found")
     }
