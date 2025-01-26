@@ -31,7 +31,7 @@ class ArticleControllerTest {
         )
 
         // when
-        `when`(facade.getArticle(any())).thenReturn(article)
+        `when`(facade.getArticleById(any())).thenReturn(article)
 
         // then
         mockMvc.get("/api/articles/{id}", article.id)

@@ -21,7 +21,7 @@ class ArticleController(private val service: ArticleService) {
 
     @GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
     fun getArticle(@PathVariable id: ArticleId): ResponseEntity<Map<String, ArticleDto>> {
-        val article = service.getArticle(id)
+        val article = service.getArticleById(id)
         return ResponseEntity
             .status(HttpStatus.OK)
             .body(mapOf("article" to article))

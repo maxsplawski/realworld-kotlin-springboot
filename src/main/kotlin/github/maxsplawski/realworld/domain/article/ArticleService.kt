@@ -15,9 +15,13 @@ class ArticleService(private val articleRepository: ArticleRepository) {
             .findAll(ArticlesFilter.from(articlesRequest))
             .map { it.toDto() }
 
-    fun getArticle(id: ArticleId) =
+    fun getArticleById(id: ArticleId) =
         articleRepository.findById(id)?.toDto()
             ?: throw ArticleNotFoundException("Article with id: '${id.value}' not found")
+
+    fun getArticleBySlug(slug: String) =
+        articleRepository.findBySlug(slug)?.toDto()
+            ?: throw ArticleNotFoundException("Article with slug: '$slug' not found")
 
     fun createArticle(createArticleRequest: CreateArticleRequest): ArticleDto {
         val article = Article.from(createArticleRequest)
