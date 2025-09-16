@@ -18,14 +18,13 @@ class DataInitializer(
 ) : CommandLineRunner {
 
     override fun run(vararg args: String?) {
-        with(mongoTemplate.db) {
-            getCollection("articles").drop()
-        }
+        mongoTemplate.db.getCollection("articles").drop()
         logger.info("Initializing data")
         var articles: List<ArticleEntity>
         val elapsedTime = measureTime {
             val resource = ClassPathResource("json/articles.json")
-            articles = objectMapper.readValue(resource.inputStream, Array<ArticleEntity>::class.java)
+            articles = objectMapper
+                .readValue(resource.inputStream, Array<ArticleEntity>::class.java)
                 .toList()
             mongoTemplate.insertAll(articles)
         }
