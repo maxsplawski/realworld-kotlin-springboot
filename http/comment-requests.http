@@ -1,13 +1,11 @@
 ###
 # @name GetCommentsRequest
 GET http://localhost:8080/api/articles/Article-title/comments
-
 Accept: application/json
 
 ###
 # @name CreateCommentRequest
 POST http://localhost:8080/Article-title/comments
-
 Accept: application/json
 Content-Type: application/json
 
